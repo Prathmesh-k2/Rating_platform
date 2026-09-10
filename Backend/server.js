@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const adminRoutes = require("./src/routes/admin");
+const authRoutes = require("./src/routes/auth");
 const db = require('./src/config/database');
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.json());
 
 // API Routes
 app.use("/api/admin", adminRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.send("Server is running");
