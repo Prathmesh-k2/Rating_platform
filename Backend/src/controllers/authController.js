@@ -7,7 +7,7 @@ exports.signup = async (req, res) => {
   const { name, email, password, address } = req.body;
 
   // Normal user by default
-  const role = "user";
+  const role = role || "user";
 
   try {
     // Check existing email
