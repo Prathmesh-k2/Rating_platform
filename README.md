@@ -38,6 +38,21 @@ Rating_platform/
 └── README.md
 ```
 
+## Features and Screenshots
+
+### Admin Workflow
+The platform administrators have sweeping access to manage users, categorize them dynamically by role, and view deep analytics detailing recent interactions across the platform.
+![Admin Dashboard](screenshots/Admin/Screenshot%202026-09-11%20180123.png)
+![Admin User Management](screenshots/Admin/Screenshot%202026-09-11%20180148.png)
+
+### Store Owner Workflow
+Store owners are equipped with an isolated, specialized dashboard summarizing metrics and reviews explicitly tied to their stores, ensuring they can seamlessly monitor feedback.
+![Owner Dashboard](screenshots/Owner/Screenshot%202026-09-11%20180517.png)
+
+### User Workflow
+Normal end-users have access to a clean directory to browse available platform stores and securely leave timestamped ratings/reviews detailing their experiences.
+![User View](screenshots/User/Screenshot%202026-09-11%20180421.png)
+
 ## Detailed File Guide
 
 ### Root
