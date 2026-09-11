@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const db = require("../config/database");
 
 // SIGNUP
-// SIGNUP
 exports.signup = async (req, res) => {
   const { name, email, password, address } = req.body;
 

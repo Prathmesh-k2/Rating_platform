@@ -174,12 +174,12 @@ Access is enforced with JWT auth middleware on backend and protected routes on f
 
 ## Local Setup
 
-## 1) Prerequisites
+### 1) Prerequisites
 
 - Node.js 18+
 - MySQL server
 
-## 2) Backend setup
+### 2) Backend setup
 
 1. Go to backend:
    ```bash
@@ -208,7 +208,7 @@ Access is enforced with JWT auth middleware on backend and protected routes on f
    npm start
    ```
 
-## 3) Frontend setup
+### 3) Frontend setup
 
 1. Open a new terminal and go to frontend:
    ```bash
