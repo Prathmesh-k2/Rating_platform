@@ -3,11 +3,18 @@ const jwt = require("jsonwebtoken");
 const db = require("../config/database");
 
 // SIGNUP
+// SIGNUP
 exports.signup = async (req, res) => {
   const { name, email, password, address } = req.body;
 
-  // Normal user by default
-  const role = role || "user";
+  // Every normal signup gets user role
+  const userRole = "user";
+
+  if (!name || !email || !password || !address) {
+    return res.status(400).json({
+      error: "Name, email, password and address are required"
+    });
+  }
 
   try {
     // Check existing email
@@ -28,14 +35,16 @@ exports.signup = async (req, res) => {
     // Insert user
     const [result] = await db.query(
       `INSERT INTO users
-            (name, email, password, role, address)
-            VALUES (?, ?, ?, ?, ?)`,
-      [name, email, hashedPassword, role, address]
+       (name, email, password, role, address)
+       VALUES (?, ?, ?, ?, ?)`,
+      [name, email, hashedPassword, userRole, address]
     );
 
     res.status(201).json({
+      success: true,
       message: "User registered successfully",
-      user_id: result.insertId
+      user_id: result.insertId,
+      role: userRole
     });
 
   } catch (error) {
@@ -46,7 +55,6 @@ exports.signup = async (req, res) => {
     });
   }
 };
-
 
 // LOGIN
 exports.login = async (req, res) => {
@@ -93,13 +101,14 @@ exports.login = async (req, res) => {
         user_id: user.user_id,
         role: user.role
       },
-      process.env.JWT_SECRET || 'secret',
+      process.env.JWT_SECRET,
       {
         expiresIn: "24h"
       }
     );
 
     res.status(200).json({
+      success: true,
       message: "Logged in successfully",
       token: token,
       user: {

@@ -1,17 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const { validateUser } = require('../validators/userValidator');
+const authVerification = require('../middleware/auth');
 
-// User routes
-router.post('/users', validateUser, adminController.createUser);
-router.get('/users', adminController.getUsers);
-router.get('/users/:id', adminController.getUserById);
+// Middleware: only allow admin role
+const adminOnly = (req, res, next) => {
+    if (req.user?.role !== 'admin') {
+        return res.status(403).json({ error: 'Access denied. Admins only.' });
+    }
+    next();
+};
 
-// Store routes
-router.post('/stores', adminController.createStore);
+// Dashboard stats
+router.get('/dashboard', authVerification, adminOnly, adminController.getDashboard);
 
-// Dashboard routes
-router.get('/dashboard', adminController.getDashboard);
+// User management
+router.get('/users',     authVerification, adminOnly, adminController.getUsers);
+router.post('/users',    authVerification, adminOnly, adminController.createUser);
+router.get('/users/:id', authVerification, adminOnly, adminController.getUserById);
+router.put('/users/:id', authVerification, adminOnly, adminController.updateUser);
+router.delete('/users/:id', authVerification, adminOnly, adminController.deleteUser);
+
+// Store management
+router.post('/stores',   authVerification, adminOnly, adminController.createStore);
+router.put('/stores/:id', authVerification, adminOnly, adminController.updateStore);
+router.delete('/stores/:id', authVerification, adminOnly, adminController.deleteStore);
 
 module.exports = router;
