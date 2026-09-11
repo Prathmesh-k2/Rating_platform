@@ -16,7 +16,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// API Routes
+// API route groups
 app.use("/api/admin", adminRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/stores", storeRoutes);
@@ -32,9 +32,9 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
     console.log(`Server running on http://localhost:${PORT}`);
 
-    // Check DB Connection
+    // Verify database connection at startup
     try {
-        await db.pool.getConnection(); // Need to export pool to use getConnection(), alternatively we can run a simple query
+        await db.pool.getConnection();
         console.log(" Database connected successfully.");
     } catch (error) {
         console.error(" Database connection failed:", error.message);
